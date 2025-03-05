@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Wypłat - Rozładunek Kontenerów</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <h1 class="text-xl font-bold text-gray-800">System Wypłat</h1>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <button class="nav-btn active" data-section="workers">
+                            <i class="fas fa-users"></i>
+                            Pracownicy
+                        </button>
+                        <button class="nav-btn" data-section="teams">
+                            <i class="fas fa-people-group"></i>
+                            Zespoły
+                        </button>
+                        <button class="nav-btn" data-section="containers">
+                            <i class="fas fa-box"></i>
+                            Rejestracja Kontenera
+                        </button>
+                        <button class="nav-btn" data-section="history">
+                            <i class="fas fa-history"></i>
+                            Historia Wypłat
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+        <!-- Workers Section -->
+        <section id="workers-section" class="section active">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold mb-6">Lista Pracowników</h2>
+                <div class="mb-6">
+                    <form id="worker-form" class="space-y-4">
+                        <div>
+                            <label for="worker-name" class="block text-sm font-medium text-gray-700">Imię i Nazwisko</label>
+                            <input type="text" id="worker-name" name="worker-name" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        </div>
+                        <button type="submit"
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Dodaj Pracownika
+                        </button>
+                    </form>
+                </div>
+                <div class="overflow-x-auto">
+                    <table id="workers-table" class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imię i Nazwisko</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Workers will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teams Section -->
+        <section id="teams-section" class="section hidden">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold mb-6">Tworzenie Zespołów</h2>
+                <form id="team-form" class="space-y-4">
+                    <div>
+                        <label for="team-date" class="block text-sm font-medium text-gray-700">Data</label>
+                        <input type="date" id="team-date" name="team-date" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="worker1" class="block text-sm font-medium text-gray-700">Pracownik 1</label>
+                        <select id="worker1" name="worker1" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">Wybierz pracownika</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="worker2" class="block text-sm font-medium text-gray-700">Pracownik 2</label>
+                        <select id="worker2" name="worker2" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">Wybierz pracownika</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Utwórz Zespół
+                    </button>
+                </form>
+                <div class="mt-8">
+                    <h3 class="text-lg font-medium mb-4">Lista Zespołów</h3>
+                    <div class="overflow-x-auto">
+                        <table id="teams-table" class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pracownicy</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- Teams will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Containers Section -->
+        <section id="containers-section" class="section hidden">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold mb-6">Rejestracja Kontenera</h2>
+                <form id="container-form" class="space-y-4">
+                    <div>
+                        <label for="container-date" class="block text-sm font-medium text-gray-700">Data</label>
+                        <input type="date" id="container-date" name="container-date" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="team-select" class="block text-sm font-medium text-gray-700">Zespół</label>
+                        <select id="team-select" name="team-select" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">Wybierz zespół</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="package-count" class="block text-sm font-medium text-gray-700">Liczba Paczek</label>
+                        <input type="number" id="package-count" name="package-count" required min="1"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <button type="submit"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Zarejestruj Kontener
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history-section" class="section hidden">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold mb-6">Historia Wypłat</h2>
+                <div class="mb-6 flex space-x-4">
+                    <div class="flex-1">
+                        <label for="history-worker" class="block text-sm font-medium text-gray-700">Pracownik</label>
+                        <select id="history-worker" name="history-worker"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">Wszyscy pracownicy</option>
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label for="history-date-from" class="block text-sm font-medium text-gray-700">Od</label>
+                        <input type="date" id="history-date-from" name="history-date-from"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div class="flex-1">
+                        <label for="history-date-to" class="block text-sm font-medium text-gray-700">Do</label>
+                        <input type="date" id="history-date-to" name="history-date-to"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table id="history-table" class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pracownik</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Liczba Paczek</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Wypłata (EUR)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- History entries will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/workers.js"></script>
+    <script src="js/teams.js"></script>
+    <script src="js/containers.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
